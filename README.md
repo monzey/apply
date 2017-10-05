@@ -1,5 +1,6 @@
-# ResumeCreator
+# Apply
 
+Apply for a job with this app which can be used to create custom resumes and cover letter
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.3.
 
 ## Development server
