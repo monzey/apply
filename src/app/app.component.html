@@ -8,15 +8,17 @@
         </mat-nav-list>
     </mat-sidenav>
 
-    <mat-toolbar color="primary">
+    <mat-toolbar color="accent">
         <button type="button" mat-icon-button (click)="sidenav.open()">
             <mat-icon >menu</mat-icon>
         </button>
         <a mat-button href="/">
             Apply
         </a>
+        <span class="spacer"></span>
+        <app-resume-selector></app-resume-selector>
     </mat-toolbar>
-    
+
     <div class="container">
         <router-outlet></router-outlet>
     </div>
