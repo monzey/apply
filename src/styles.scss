@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~gridlex/src/gridlex.scss";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body, html, mat-sidenav-container {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    margin: 50px 12% 0 12%;
+}
+
+/*.container > * {
+    display: flex;
+}
+
+mat-card {
+    width: 300px;
+    margin: 5px;
+}*/
+
+mat-sidenav {
+    width: 15%;
+}

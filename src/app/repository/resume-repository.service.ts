@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Resume } from './resume';
+import { Resume } from '../model/resume';
 import { RepositoryService } from './repository.service';
 
 @Injectable()

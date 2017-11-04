@@ -1,0 +1,15 @@
+<div class="grid-3">
+    <div class="col" *ngFor="let resume of resumes">
+        <mat-card>
+            <mat-card-title>
+                {{ resume.name }}
+            </mat-card-title>
+            <mat-card-content>
+                <p>{{ resume.description }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>CONFIGURER</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
