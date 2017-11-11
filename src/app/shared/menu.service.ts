@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MenuItem } from './menu-item';
+import { MenuItem } from '../model/menu-item';
 
 @Injectable()
 export class MenuService {
@@ -15,5 +15,4 @@ export class MenuService {
             new MenuItem('Theme', '/theme', 'format_color_fill'),
         ]
     }
-
 }

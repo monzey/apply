@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Resume } from '../model/resume';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ResumeSelectorService {
     private readonly localStorageKey = 'resume';
-    private selectedResume: Resume;
+    private selectedResume: ReplaySubject<Resume>;
 
-    constructor() { }
+    constructor() {
+        this.selectedResume = new ReplaySubject();
+    }
 
     /**
      * Sets the resume for the app
      * @param {Resume} resume
      */
     selectResume(resume: Resume): void {
-        this.selectedResume = resume;
-        this.saveToLocalStorage();
+        this.selectedResume.next(resume);
+        // this.saveToLocalStorage();
     }
 
-    /**
-     * Gets the selected resume for the app
-     * @return {Resume}
-     */
-    getSelectedResume(): Resume {
-        if (this.selectedResume == null) {
-            this.selectedResume = this.retrieveFromLocalStorage();
-        }
-
-        return this.selectedResume;
+    get selected(): Observable<Resume> {
+        return this.selectedResume.asObservable();
     }
 
     /**

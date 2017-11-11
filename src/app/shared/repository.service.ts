@@ -2,13 +2,23 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Thing } from '../model/thing';
 
 @Injectable()
 export class RepositoryService {
     readonly apiBaseUri = 'http://api.apply.dev';
+    private _items: BehaviorSubject<Thing[]>;
+    private store: Thing[];
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
+        this._items = <BehaviorSubject<Thing[]>>new BehaviorSubject([]);
+        this.store = [];
+    }
+
+    get items() {
+        return this._items.asObservable();
+    }
 
     /**
      * Indicates resource name
@@ -20,27 +30,25 @@ export class RepositoryService {
 
     /**
      * Gets all resources
-     * @return {Observable<Thing[]>}
      */
-    findAll() : Observable<Thing[]> {
-        let things$ = this.http
+    loadAll() : void {
+        this.http
             .get(`${this.apiBaseUri}/${this.getResourceName()}`)
-            .map(this.mapResources, this);
-
-        return things$;
+            .map(this.mapResources, this)
+            .subscribe(items => {
+                this.store = items;
+                this._items.next(items);
+            })
     }
 
     /**
      * Get one resources based on id
      * @param  {number}            id
-     * @return {Observable<Thing>}
      */
-    find(id: number): Observable<Thing> {
+    load(id: number): void {
         let thing$ = this.http
             .get(`${this.apiBaseUri}/${this.getResourceName()}/${id}`)
-            .map(this.mapResource, this)
-
-        return thing$;
+            .map(this.mapResource, this);
     }
 
     /**
@@ -48,15 +56,29 @@ export class RepositoryService {
      * @param  {Thing}                thing
      * @return {Observable<Response>}
      */
-    save(thing: Thing): Observable<Response> {
+    save(thing: Thing): void {
+        let request;
+
         // If the thing has an id, its considered that it already exists server side. We are then talking about an update
         if (thing.id) {
-            return this.http
-                .put(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`, JSON.stringify(thing), { headers: this.getHeaders() });
+            request = this.http.put(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`, JSON.stringify(thing), { headers: this.getHeaders() });
         } else { // Else, we are talking about a creation
-            return this.http
-                .post(`${this.apiBaseUri}/${this.getResourceName()}`, JSON.stringify(thing), { headers: this.getHeaders() });
+            request = this.http.post(`${this.apiBaseUri}/${this.getResourceName()}`, JSON.stringify(thing), { headers: this.getHeaders() });
         }
+
+        request.subscribe((response) => {
+            thing = this.mapResource(response);
+            let index = this.store.indexOf(thing);
+
+            if (index > -1) {
+                this.store[index] = thing;
+            } else {
+                this.store.push(thing);
+            }
+
+            let items = this.store;
+            this._items.next(items);
+        });
     }
 
     /**
@@ -64,9 +86,16 @@ export class RepositoryService {
      * @param  {Thing}                thing
      * @return {Observable<Response>}
      */
-    delete(thing: Thing): Observable<Response> {
-        return this.http
-            .delete(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`);
+    delete(thing: Thing): void {
+        this.http
+            .delete(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`)
+            .subscribe((response) => {
+                let items = this.store;
+                items.splice(items.indexOf(thing), 1);
+                this.store = items;
+
+                this._items.next(items);
+            });
     }
 
     /**

@@ -11,7 +11,7 @@ export class ResumeRepositoryService extends RepositoryService {
         return 'resumes';
     }
 
-    protected trasnformResource(r: any): Resume {
+    protected transformResource(r: any): Resume {
         let thing = <Resume>({
             id: r.id,
             name: r.name,

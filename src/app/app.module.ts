@@ -15,6 +15,9 @@ import {
     MatCardModule
 } from '@angular/material';
 
+import { ResumeRepositoryService } from './shared/resume-repository.service';
+import { ResumeSelectorService } from './resume-selector/resume-selector.service';
+
 import { AppComponent } from './app.component';
 import { ResumesListComponent } from './resumes-list/resumes-list.component';
 import { ResumeSelectorComponent } from './resume-selector/resume-selector.component';
@@ -51,7 +54,7 @@ import { ResumeGeneralComponent } from './resume-general/resume-general.componen
         }
     ]),
   ],
-  providers: [],
+  providers: [ResumeRepositoryService, ResumeSelectorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

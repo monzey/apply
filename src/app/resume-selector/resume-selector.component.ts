@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumeRepositoryService } from '../repository/resume-repository.service';
+import { ResumeRepositoryService } from '../shared/resume-repository.service';
 import { Resume } from '../model/resume';
 import { ResumeSelectorService } from './resume-selector.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-resume-selector',
-    providers: [ResumeRepositoryService, ResumeSelectorService],
+    providers: [],
     templateUrl: './resume-selector.component.html',
     styleUrls: ['./resume-selector.component.scss']
 })
 export class ResumeSelectorComponent implements OnInit {
-    private resumes: Resume[];
-    private selectedResume: Resume;
+    private resumes$: Observable<Resume[]>;
+    private selectedResume$: Observable<Resume>;
 
     constructor(
         private resumeRepositoryService: ResumeRepositoryService,
@@ -26,9 +27,9 @@ export class ResumeSelectorComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.resumeRepositoryService
-            .findAll()
-            .subscribe(resumes => this.resumes = resumes);
+        this.selectedResume$ = this.resumeSelectorService.selected;
+        this.resumes$ = this.resumeRepositoryService.items;
+        this.resumeRepositoryService.loadAll();
     }
 
 }

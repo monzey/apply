@@ -1,7 +1,7 @@
 <form [style.fontSize.px]="15">
     <mat-form-field [color]="primary">
-        <mat-select placeholder="Resume" [ngModel]="selectedResume" (ngModelChange)="selectResume($event)" name="resumeChoice">
-            <mat-option *ngFor="let resume of resumes" [value]="resume">
+        <mat-select placeholder="Resume" [ngModel]="selectedResume$ | async" (ngModelChange)="selectResume($event)" name="resumeChoice">
+            <mat-option *ngFor="let resume of resumes$ | async" [value]="resume">
                 {{ resume.name }}
             </mat-option>
         </mat-select>

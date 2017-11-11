@@ -17,6 +17,26 @@
         </a>
         <span class="spacer"></span>
         <app-resume-selector></app-resume-selector>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <!-- À transformer en composant -->
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="createResume()">
+                <mat-icon>home</mat-icon>
+                <span>Create resume</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>home</mat-icon>
+                <span>About</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>home</mat-icon>
+                <span>About</span>
+            </button>
+        </mat-menu>
+
     </mat-toolbar>
 
     <div class="container">
