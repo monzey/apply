@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Resume } from '../model/resume';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ResumeSelectorService {
     private readonly localStorageKey = 'resume';
-    private selectedResume: ReplaySubject<Resume>;
+    private selectedResume: Subject<Resume>;
 
     constructor() {
-        this.selectedResume = new ReplaySubject();
+        if (this.memorizedResume()) {
+            this.selectedResume = new BehaviorSubject<Resume>(this.retrieveFromLocalStorage());
+        } else {
+            this.selectedResume = new ReplaySubject();
+        }
     }
 
     /**
@@ -18,7 +24,7 @@ export class ResumeSelectorService {
      */
     selectResume(resume: Resume): void {
         this.selectedResume.next(resume);
-        // this.saveToLocalStorage();
+        this.saveToLocalStorage(resume);
     }
 
     get selected(): Observable<Resume> {
@@ -37,8 +43,8 @@ export class ResumeSelectorService {
      * Saves the currently selected resume into the localStorage
      * @return {void}
      */
-    private saveToLocalStorage(): void {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.selectedResume));
+    private saveToLocalStorage(resume: Resume): void {
+        localStorage.setItem(this.localStorageKey, JSON.stringify(resume));
     }
 
     /**
@@ -47,5 +53,13 @@ export class ResumeSelectorService {
      */
     private eraseFromLocalStorage(): void {
         localStorage.removeItem(this.localStorageKey);
+    }
+
+    /**
+     * Indicated whether the local sotarge has the resume in memory or ngOnInit
+     * @return {boolean}
+     */
+    private memorizedResume(): boolean {
+        return localStorage.getItem(this.localStorageKey) != null;
     }
 }

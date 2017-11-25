@@ -12,16 +12,19 @@ import {
     MatMenuModule,
     MatListModule,
     MatSelectModule,
+    MatExpansionModule,
     MatCardModule
 } from '@angular/material';
 
 import { ResumeRepositoryService } from './shared/resume-repository.service';
-import { ResumeSelectorService } from './resume-selector/resume-selector.service';
+import { ExperienceRepositoryService } from './shared/experience-repository.service';
+import { ResumeSelectorService } from './shared/resume-selector.service';
 
 import { AppComponent } from './app.component';
 import { ResumesListComponent } from './resumes-list/resumes-list.component';
 import { ResumeSelectorComponent } from './resume-selector/resume-selector.component';
 import { ResumeGeneralComponent } from './resume-general/resume-general.component';
+import { ExperiencesListComponent } from './experiences-list/experiences-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { ResumeGeneralComponent } from './resume-general/resume-general.componen
     ResumesListComponent,
     ResumeSelectorComponent,
     ResumeGeneralComponent,
+    ExperiencesListComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +47,7 @@ import { ResumeGeneralComponent } from './resume-general/resume-general.componen
     MatListModule,
     MatSelectModule,
     MatCardModule,
+    MatExpansionModule,
     RouterModule.forRoot([
         {
             path: '',
@@ -51,10 +56,14 @@ import { ResumeGeneralComponent } from './resume-general/resume-general.componen
         {
             path: 'general',
             component: ResumeGeneralComponent
+        },
+        {
+            path: 'experiences',
+            component: ExperiencesListComponent
         }
     ]),
   ],
-  providers: [ResumeRepositoryService, ResumeSelectorService],
+  providers: [ResumeRepositoryService, ExperienceRepositoryService, ResumeSelectorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

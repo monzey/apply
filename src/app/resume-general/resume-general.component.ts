@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumeSelectorService } from '../resume-selector/resume-selector.service';
+import { ResumeSelectorService } from '../shared/resume-selector.service';
 import { Resume } from '../model/resume';
 import { Observable } from 'rxjs/Observable';
 

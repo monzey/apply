@@ -3,7 +3,7 @@ import { ResumeRepositoryService } from '../shared/resume-repository.service';
 import { Resume } from '../model/resume';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ResumeSelectorService } from '../resume-selector/resume-selector.service';
+import { ResumeSelectorService } from '../shared/resume-selector.service';
 
 @Component({
     selector: 'app-resumes-list',

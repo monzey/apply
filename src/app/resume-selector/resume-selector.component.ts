@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeRepositoryService } from '../shared/resume-repository.service';
 import { Resume } from '../model/resume';
-import { ResumeSelectorService } from './resume-selector.service';
+import { ResumeSelectorService } from '../shared/resume-selector.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -23,7 +23,6 @@ export class ResumeSelectorComponent implements OnInit {
 
     selectResume(resume: Resume) {
         this.resumeSelectorService.selectResume(resume);
-        this.router.navigate(['general']);
     }
 
     ngOnInit() {

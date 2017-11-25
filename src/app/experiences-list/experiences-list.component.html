@@ -1,0 +1,12 @@
+<mat-expansion-panel *ngFor="let experience of (selectedResume$ | async)?.experiences">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ experience.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{ experience.company }}, {{ experience.year }}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    {{ experience.description }}
+</mat-expansion-panel>

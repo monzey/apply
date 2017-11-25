@@ -117,11 +117,26 @@ export class RepositoryService {
     }
 
     /**
+     * Transform json to an array of objects
+     * @param  {any}     r
+     * @return {Thing[]}
+     */
+    public transformResources(r: any): Thing[] {
+        let items = [];
+
+        for (let item of r) {
+            items.push(this.transformResource(item));
+        }
+
+        return items;
+    }
+    
+    /**
      * Transform json data to an object
      * @param  {any}   r
      * @return {Thing}
      */
-    protected transformResource(r: any): Thing {
+    public transformResource(r: any): Thing {
         let thing = <Thing>({
             id: r.id,
             name: r.name,
