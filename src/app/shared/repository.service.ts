@@ -6,11 +6,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Thing } from '../model/thing';
 
 @Injectable()
-export class RepositoryService {
+export abstract class RepositoryService {
     readonly apiBaseUri = 'http://api.apply.dev';
     private _items: BehaviorSubject<Thing[]>;
     private store: Thing[];
 
+    /**
+     * Constrcutor
+     * @param  {Http}   http
+     * @return {[type]}
+     */
     constructor(private http: Http) {
         this._items = <BehaviorSubject<Thing[]>>new BehaviorSubject([]);
         this.store = [];
@@ -21,31 +26,62 @@ export class RepositoryService {
     }
 
     /**
-     * Indicates resource name
+     * Indicates the base resource name
      * @return {string}
      */
-    protected getResourceName(): string {
-        return 'things';
+    protected getBaseResourceName(): string|null {
+        return null;
     }
 
     /**
-     * Gets all resources
+     * Indicates resource name
+     * @return {string}
      */
-    loadAll() : void {
+    protected abstract getResourceName(): string
+
+    /**
+     * Gets all resources
+     * if id is provided and base resource name is set, the resources are fetched as subresrources
+     */
+    loadAll(id: number = null) : void {
+        if (id && this.getBaseResourceName()) {
+            this.http
+                .get(`${this.apiBaseUri}/${this.getBaseResourceName()}/${id}/${this.getResourceName()}`)
+                .map(this.mapResources, this)
+                .subscribe(items => {
+                    this.store = items;
+                    this._items.next(items);
+                });
+        } else {
+            this.http
+                .get(`${this.apiBaseUri}/${this.getResourceName()}`)
+                .map(this.mapResources, this)
+                .subscribe(items => {
+                    this.store = items;
+                    this._items.next(items);
+                });
+        }
+    }
+
+    /**
+     * Getes all resources based on parameters
+     * @param {any[]} parameters
+     */
+    load(parameters: any[]): void {
         this.http
-            .get(`${this.apiBaseUri}/${this.getResourceName()}`)
+            .get(`${this.apiBaseUri}/${this.getResourceName()}`, parameters)
             .map(this.mapResources, this)
             .subscribe(items => {
                 this.store = items;
                 this._items.next(items);
-            })
+            });
     }
 
     /**
      * Get one resources based on id
      * @param  {number}            id
      */
-    load(id: number): void {
+    loadOne(id: number): void {
         let thing$ = this.http
             .get(`${this.apiBaseUri}/${this.getResourceName()}/${id}`)
             .map(this.mapResource, this);
@@ -68,9 +104,19 @@ export class RepositoryService {
 
         request.subscribe((response) => {
             thing = this.mapResource(response);
-            let index = this.store.indexOf(thing);
+            let alreadyExisting = false;
+            let index: number;
 
-            if (index > -1) {
+            this.store.filter((element, i) => {
+                if (element.id == thing.id) {
+                    index = i;
+                    alreadyExisting = element.id == thing.id;
+
+                    return;
+                }
+            });
+
+            if (alreadyExisting) {
                 this.store[index] = thing;
             } else {
                 this.store.push(thing);
@@ -103,7 +149,7 @@ export class RepositoryService {
      * @param  {Response} response
      * @return {Thing[]}
      */
-    protected mapResources(response: Response): Thing[] {
+    public mapResources(response: Response): Thing[] {
         return response.json()['hydra:member'].map(this.transformResource, this);
     }
 
@@ -130,7 +176,7 @@ export class RepositoryService {
 
         return items;
     }
-    
+
     /**
      * Transform json data to an object
      * @param  {any}   r

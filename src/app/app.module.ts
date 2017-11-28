@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
     MatToolbarModule,
     MatIconModule,
@@ -13,8 +14,15 @@ import {
     MatListModule,
     MatSelectModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule
 } from '@angular/material';
+import { NgcFloatButtonModule } from 'ngc-float-button';
 
 import { ResumeRepositoryService } from './shared/resume-repository.service';
 import { ExperienceRepositoryService } from './shared/experience-repository.service';
@@ -25,6 +33,7 @@ import { ResumesListComponent } from './resumes-list/resumes-list.component';
 import { ResumeSelectorComponent } from './resume-selector/resume-selector.component';
 import { ResumeGeneralComponent } from './resume-general/resume-general.component';
 import { ExperiencesListComponent } from './experiences-list/experiences-list.component';
+import { EditExperienceComponent } from './edit-experience/edit-experience.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +42,13 @@ import { ExperiencesListComponent } from './experiences-list/experiences-list.co
     ResumeSelectorComponent,
     ResumeGeneralComponent,
     ExperiencesListComponent,
+    EditExperienceComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
@@ -48,6 +59,13 @@ import { ExperiencesListComponent } from './experiences-list/experiences-list.co
     MatSelectModule,
     MatCardModule,
     MatExpansionModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgcFloatButtonModule,
     RouterModule.forRoot([
         {
             path: '',
@@ -64,6 +82,7 @@ import { ExperiencesListComponent } from './experiences-list/experiences-list.co
     ]),
   ],
   providers: [ResumeRepositoryService, ExperienceRepositoryService, ResumeSelectorService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EditExperienceComponent]
 })
 export class AppModule { }

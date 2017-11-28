@@ -7,6 +7,9 @@ import { RepositoryService } from './repository.service';
 
 @Injectable()
 export class ExperienceRepositoryService extends RepositoryService {
+    protected getBaseResourceName(): string {
+        return 'resumes';
+    }
 
     protected getResourceName(): string {
         return 'experiences';

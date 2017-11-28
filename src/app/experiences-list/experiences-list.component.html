@@ -1,4 +1,4 @@
-<mat-expansion-panel *ngFor="let experience of (selectedResume$ | async)?.experiences">
+<mat-expansion-panel *ngFor="let experience of experiences$ | async">
     <mat-expansion-panel-header>
         <mat-panel-title>
             {{ experience.name }}
@@ -9,4 +9,15 @@
     </mat-expansion-panel-header>
 
     {{ experience.description }}
+    <mat-action-row>
+        <button mat-icon-button matTooltip="Create" matTooltipPosition="below" (click)="editExperience(experience)">
+            <mat-icon>create</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Delete" matTooltipPosition="below">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Duplicate" matTooltipPosition="below">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+    </mat-action-row>
 </mat-expansion-panel>
