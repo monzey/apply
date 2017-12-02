@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Edit the resume</h2>
+
+<form [formGroup]="resumeEditForm" (ngSubmit)="save()">
+    <mat-dialog-content class="grid">
+        <mat-form-field class="col-6">
+            <input matInput formControlName="name" placeholder="Name">
+        </mat-form-field>
+        <mat-form-field class="col-12">
+            <textarea matInput formControlName="description" placeholder="Description"></textarea>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>
+            Cancel
+        </button>
+        <button mat-button tpye="submit">
+            Save
+        </button>
+    </mat-dialog-actions>
+</form>

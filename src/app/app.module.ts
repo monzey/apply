@@ -34,6 +34,7 @@ import { ResumeSelectorComponent } from './resume-selector/resume-selector.compo
 import { ResumeGeneralComponent } from './resume-general/resume-general.component';
 import { ExperiencesListComponent } from './experiences-list/experiences-list.component';
 import { EditExperienceComponent } from './edit-experience/edit-experience.component';
+import { EditResumeComponent } from './edit-resume/edit-resume.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EditExperienceComponent } from './edit-experience/edit-experience.compo
     ResumeGeneralComponent,
     ExperiencesListComponent,
     EditExperienceComponent,
+    EditResumeComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +85,6 @@ import { EditExperienceComponent } from './edit-experience/edit-experience.compo
   ],
   providers: [ResumeRepositoryService, ExperienceRepositoryService, ResumeSelectorService],
   bootstrap: [AppComponent],
-  entryComponents: [EditExperienceComponent]
+  entryComponents: [EditExperienceComponent, EditResumeComponent]
 })
 export class AppModule { }

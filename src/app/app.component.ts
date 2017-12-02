@@ -3,6 +3,8 @@ import { MenuService } from './shared/menu.service';
 import { MenuItem } from './model/menu-item';
 import { Resume } from './model/resume';
 import { ResumeRepositoryService } from './shared/resume-repository.service';
+import { MatDialog } from '@angular/material';
+import { EditResumeComponent } from './edit-resume/edit-resume.component';
 
 @Component({
     selector: 'app-root',
@@ -13,13 +15,12 @@ import { ResumeRepositoryService } from './shared/resume-repository.service';
 export class AppComponent {
     private menuItems: MenuItem[];
 
-    constructor(private menuService: MenuService, private resumeRepositoryService: ResumeRepositoryService) {
+    constructor(private menuService: MenuService, private resumeRepositoryService: ResumeRepositoryService, private dialog: MatDialog) {
         this.menuItems = this.menuService.getLinks();
     }
 
     createResume() {
-        let resume = <Resume>({name: 'noob', description: 'noobism', url:'http://google.com'});
-        this.resumeRepositoryService.save(resume);
+        this.dialog.open(EditResumeComponent, {});
     }
 
     ngOnInit() {

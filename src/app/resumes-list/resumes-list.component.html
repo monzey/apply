@@ -8,8 +8,9 @@
                 <p>{{ resume.description }}</p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button (click)="selectResume(resume)">CONFIGURER</button>
-                <button mat-button (click)="deleteResume(resume)">SUPPRIMER</button>
+                <button mat-icon-button matTooltip="Configure" matTooltipPosition="below" (click)="selectResume(resume)"><mat-icon>settings</mat-icon></button>
+                <button mat-icon-button matTooltip="Delete" matTooltipPosition="below" (click)="deleteResume(resume)"><mat-icon>delete</mat-icon></button>
+                <button mat-icon-button matTooltip="Edit" matTooltipPosition="below" (click)="editResume(resume)"><mat-icon>create</mat-icon></button>
             </mat-card-actions>
         </mat-card>
     </div>

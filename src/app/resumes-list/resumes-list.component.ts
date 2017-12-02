@@ -4,6 +4,8 @@ import { Resume } from '../model/resume';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ResumeSelectorService } from '../shared/resume-selector.service';
+import { MatDialog } from '@angular/material';
+import { EditResumeComponent } from '../edit-resume/edit-resume.component';
 
 @Component({
     selector: 'app-resumes-list',
@@ -17,7 +19,8 @@ export class ResumesListComponent implements OnInit {
     constructor(
         private resumeRepositoryService: ResumeRepositoryService,
         private resumeSelectorService: ResumeSelectorService,
-        private router: Router
+        private router: Router,
+        private dialog: MatDialog
     ) { }
 
     selectResume(resume: Resume) {
@@ -27,6 +30,10 @@ export class ResumesListComponent implements OnInit {
 
     deleteResume(resume: Resume) {
         this.resumeRepositoryService.delete(resume);
+    }
+
+    editResume(resume: Resume) {
+        this.dialog.open(EditResumeComponent, {data: {resume: resume}});
     }
 
     ngOnInit() {
