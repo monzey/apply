@@ -14,16 +14,24 @@
     <!-- À transformer en composant -->
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="createResume()">
-            <mat-icon>home</mat-icon>
+            <mat-icon>assignment_ind</mat-icon>
             <span>Create resume</span>
         </button>
-        <button mat-menu-item>
-            <mat-icon>home</mat-icon>
-            <span>About</span>
+        <button mat-menu-item (click)="createExperience()">
+            <mat-icon>business_center</mat-icon>
+            <span>Create experience</span>
         </button>
         <button mat-menu-item>
-            <mat-icon>home</mat-icon>
-            <span>About</span>
+            <mat-icon>school</mat-icon>
+            <span>Create graduation</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>whatshot</mat-icon>
+            <span>Create project</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>format_color_fill</mat-icon>
+            <span>Create theme</span>
         </button>
     </mat-menu>
 

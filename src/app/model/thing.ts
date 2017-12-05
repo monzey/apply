@@ -3,4 +3,8 @@ export class Thing {
     name: string;
     description: string;
     url: string;
+
+    constructor() {
+        this.url = '';
+    }
 }

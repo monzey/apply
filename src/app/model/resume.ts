@@ -4,8 +4,7 @@ import { Experience } from './experience';
 export class Resume extends Thing {
     experiences: Experience[];
 
-    constructor(){
+    constructor() {
         super();
-        this.url = '';
     }
 }

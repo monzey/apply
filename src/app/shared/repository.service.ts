@@ -95,11 +95,13 @@ export abstract class RepositoryService {
     save(thing: Thing): void {
         let request;
 
+        let data = this.denormalize(thing);
+
         // If the thing has an id, its considered that it already exists server side. We are then talking about an update
         if (thing.id) {
-            request = this.http.put(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`, JSON.stringify(thing), { headers: this.getHeaders() });
+            request = this.http.put(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`, data, { headers: this.getHeaders() });
         } else { // Else, we are talking about a creation
-            request = this.http.post(`${this.apiBaseUri}/${this.getResourceName()}`, JSON.stringify(thing), { headers: this.getHeaders() });
+            request = this.http.post(`${this.apiBaseUri}/${this.getResourceName()}`, data, { headers: this.getHeaders() });
         }
 
         request.subscribe((response) => {
@@ -191,6 +193,31 @@ export abstract class RepositoryService {
         });
 
         return thing;
+    }
+
+    /**
+     * Denormalizes the object to obtain an object understandable by api platform
+     * @param {Thing} thing
+     * @return string
+     */
+    private denormalize(thing: Thing): string {
+        for (let attribute in thing) {
+            if (thing[attribute] instanceof Object && !(thing[attribute] instanceof Array)) {
+                thing[attribute] = `/${attribute}/${thing[attribute].id}`
+            }
+
+            if (thing[attribute] instanceof Object && thing[attribute] instanceof Array) {
+                let items = thing[attribute].slice(0); // Clone
+                thing[attribute] = [];
+
+                for (let item of items) {
+                    let id = item.id;
+                    thing[attribute].push(`/${attribute}/${id}`);
+                }
+            }
+        }   
+
+        return JSON.stringify(thing);
     }
 
     /**

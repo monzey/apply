@@ -23,8 +23,12 @@ export class ResumeSelectorService {
      * @param {Resume} resume
      */
     selectResume(resume: Resume): void {
-        this.selectedResume.next(resume);
-        this.saveToLocalStorage(resume);
+        // needed to cast the object
+        let r = new Resume();
+        Object.assign(r, resume);
+
+        this.selectedResume.next(r);
+        this.saveToLocalStorage(r);
     }
 
     get selected(): Observable<Resume> {
@@ -36,7 +40,12 @@ export class ResumeSelectorService {
      * @return {Resume}
      */
     private retrieveFromLocalStorage(): Resume {
-        return <Resume>(JSON.parse(localStorage.getItem(this.localStorageKey)));
+        let resume = new Resume();
+        let object = JSON.parse(localStorage.getItem(this.localStorageKey));
+
+        Object.assign(resume, object);
+
+        return resume;
     }
 
     /**
