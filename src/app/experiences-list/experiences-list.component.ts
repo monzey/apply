@@ -18,26 +18,28 @@ export class ExperiencesListComponent implements OnInit {
     private experiences: Experience[];
     private selectedResume$: Observable<Resume>;
 
-    constructor(
+    public constructor(
         private resumeSelectorService: ResumeSelectorService,
         private experienceRepositoryService: ExperienceRepositoryService,
         private resumeRepositoryService: ResumeRepositoryService,
         private dialog: MatDialog
     ) { }
 
-    addExperience(experience: Experience) {
+    public edit(experience: Experience): void {
         this.dialog.open(EditExperienceComponent, {
             data: { experience: experience }
         });
     }
 
-    editExperience(experience: Experience) {
-        this.dialog.open(EditExperienceComponent, {
-            data: { experience: experience }
-        });
+    public delete(experience: Experience): void {
+        this.experienceRepositoryService.delete(experience);
     }
 
-    ngOnInit() {
+    public duplicate(experience: Experience): void {
+
+    }
+
+    public ngOnInit(): void {
         let self = this;
         this.selectedResume$ = this.resumeSelectorService.selected;
 
