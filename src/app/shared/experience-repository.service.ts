@@ -22,7 +22,8 @@ export class ExperienceRepositoryService extends RepositoryService {
             description: r.description,
             url: r.url,
             company: r.company,
-            year: r.year
+            year: r.year,
+            resumes: r.resumes
         });
 
         return thing;

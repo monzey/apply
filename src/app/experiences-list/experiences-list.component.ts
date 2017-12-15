@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Resume } from '../model/resume';
 import { Experience } from '../model/experience';
 import { EditExperienceComponent } from '../edit-experience/edit-experience.component';
+import { DuplicateResumeThingComponent } from '../duplicate-resume-thing/duplicate-resume-thing.component';
 
 @Component({
     selector: 'app-experiences-list',
@@ -15,7 +16,6 @@ import { EditExperienceComponent } from '../edit-experience/edit-experience.comp
 })
 export class ExperiencesListComponent implements OnInit {
     private experiences$: Observable<Experience[]>;
-    private experiences: Experience[];
     private selectedResume$: Observable<Resume>;
 
     public constructor(
@@ -32,11 +32,32 @@ export class ExperiencesListComponent implements OnInit {
     }
 
     public delete(experience: Experience): void {
-        this.experienceRepositoryService.delete(experience);
+        if (experience.resumes.length > 1) {
+            let resume: Resume;
+            
+            this.selectedResume$.subscribe(r => {
+                resume = r;
+            });
+
+            this.unbind(experience, resume);
+        } else {
+            this.experienceRepositoryService.delete(experience);
+        }
     }
 
     public duplicate(experience: Experience): void {
+        this.dialog.open(DuplicateResumeThingComponent, {
+            data: { thing: experience }
+        });
+    }
 
+    private unbind(experience: Experience, resume: Resume): void {
+        experience.resumes = experience.resumes.filter(expResume => {
+            return expResume.id != resume.id;
+        });
+
+        this.experienceRepositoryService.save(experience);
+        let self = this;
     }
 
     public ngOnInit(): void {

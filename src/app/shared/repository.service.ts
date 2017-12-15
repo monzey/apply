@@ -7,9 +7,9 @@ import { Thing } from '../model/thing';
 
 @Injectable()
 export abstract class RepositoryService {
-    readonly apiBaseUri = 'http://api.apply.dev';
+    readonly apiBaseUri = 'http://dev.api.apply';
     private _items: BehaviorSubject<Thing[]>;
-    private store: Thing[];
+    private _store: Thing[];
 
     /**
      * Constrcutor
@@ -18,7 +18,7 @@ export abstract class RepositoryService {
      */
     constructor(private http: Http) {
         this._items = <BehaviorSubject<Thing[]>>new BehaviorSubject([]);
-        this.store = [];
+        this._store = [];
     }
 
     get items() {
@@ -42,6 +42,8 @@ export abstract class RepositoryService {
     /**
      * Gets all resources
      * if id is provided and base resource name is set, the resources are fetched as subresrources
+     * @param {number} id
+     * @return {void}
      */
     loadAll(id: number = null) : void {
         if (id && this.getBaseResourceName()) {
@@ -49,7 +51,7 @@ export abstract class RepositoryService {
                 .get(`${this.apiBaseUri}/${this.getBaseResourceName()}/${id}/${this.getResourceName()}`)
                 .map(this.mapResources, this)
                 .subscribe(items => {
-                    this.store = items;
+                    this._store = items;
                     this._items.next(items);
                 });
         } else {
@@ -57,7 +59,7 @@ export abstract class RepositoryService {
                 .get(`${this.apiBaseUri}/${this.getResourceName()}`)
                 .map(this.mapResources, this)
                 .subscribe(items => {
-                    this.store = items;
+                    this._store = items;
                     this._items.next(items);
                 });
         }
@@ -72,7 +74,7 @@ export abstract class RepositoryService {
             .get(`${this.apiBaseUri}/${this.getResourceName()}`, parameters)
             .map(this.mapResources, this)
             .subscribe(items => {
-                this.store = items;
+                this._store = items;
                 this._items.next(items);
             });
     }
@@ -109,7 +111,9 @@ export abstract class RepositoryService {
             let alreadyExisting = false;
             let index: number;
 
-            this.store.filter((element, i) => {
+            console.log(thing);
+
+            this._store.filter((element, i) => {
                 if (element.id == thing.id) {
                     index = i;
                     alreadyExisting = element.id == thing.id;
@@ -119,12 +123,12 @@ export abstract class RepositoryService {
             });
 
             if (alreadyExisting) {
-                this.store[index] = thing;
+                this._store[index] = thing;
             } else {
-                this.store.push(thing);
+                this._store.push(thing);
             }
 
-            let items = this.store;
+            let items = this._store;
             this._items.next(items);
         });
     }
@@ -138,9 +142,9 @@ export abstract class RepositoryService {
         this.http
             .delete(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`)
             .subscribe((response) => {
-                let items = this.store;
+                let items = this._store;
                 items.splice(items.indexOf(thing), 1);
-                this.store = items;
+                this._store = items;
 
                 this._items.next(items);
             });
@@ -152,7 +156,7 @@ export abstract class RepositoryService {
      * @return {Thing[]}
      */
     public mapResources(response: Response): Thing[] {
-        return response.json()['hydra:member'].map(this.transformResource, this);
+        return response.json()['hydra:member'].map(this.transform, this);
     }
 
     /**
@@ -161,7 +165,7 @@ export abstract class RepositoryService {
      * @return {Thing}
      */
     protected mapResource(response: Response): Thing {
-        return this.transformResource(response.json());
+        return this.transform(response.json());
     }
 
     /**
@@ -173,10 +177,27 @@ export abstract class RepositoryService {
         let items = [];
 
         for (let item of r) {
-            items.push(this.transformResource(item));
+            let converted = this.transformResource(item);
+            converted['@type'] = item['@type']; // keep the type
+
+            items.push(converted);
         }
 
         return items;
+    }
+
+    /**
+     * Generic transformation of json data to an object
+     * Used to add generic attributes (like @type)
+     * @param {any} r
+     * @return {Thing}
+     */
+    public transform(r: any): Thing {
+        let thing = this.transformResource(r);
+
+        thing['@type'] = r['@type'];
+
+        return thing;
     }
 
     /**

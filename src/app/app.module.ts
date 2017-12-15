@@ -22,11 +22,11 @@ import {
     MatNativeDateModule,
     MatTooltipModule
 } from '@angular/material';
-import { NgcFloatButtonModule } from 'ngc-float-button';
 
 import { ResumeRepositoryService } from './shared/resume-repository.service';
 import { ExperienceRepositoryService } from './shared/experience-repository.service';
 import { ResumeSelectorService } from './shared/resume-selector.service';
+import { RepositoryContainerService } from './shared/repository-container.service';
 
 import { AppComponent } from './app.component';
 import { ResumesListComponent } from './resumes-list/resumes-list.component';
@@ -35,56 +35,64 @@ import { ResumeGeneralComponent } from './resume-general/resume-general.componen
 import { ExperiencesListComponent } from './experiences-list/experiences-list.component';
 import { EditExperienceComponent } from './edit-experience/edit-experience.component';
 import { EditResumeComponent } from './edit-resume/edit-resume.component';
+import { DuplicateResumeThingComponent } from './duplicate-resume-thing/duplicate-resume-thing.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ResumesListComponent,
-    ResumeSelectorComponent,
-    ResumeGeneralComponent,
-    ExperiencesListComponent,
-    EditExperienceComponent,
-    EditResumeComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatListModule,
-    MatSelectModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatDialogModule,
-    MatTooltipModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    NgcFloatButtonModule,
-    RouterModule.forRoot([
-        {
-            path: '',
-            component: ResumesListComponent
-        },
-        {
-            path: 'general',
-            component: ResumeGeneralComponent
-        },
-        {
-            path: 'experiences',
-            component: ExperiencesListComponent
-        }
-    ]),
-  ],
-  providers: [ResumeRepositoryService, ExperienceRepositoryService, ResumeSelectorService],
-  bootstrap: [AppComponent],
-  entryComponents: [EditExperienceComponent, EditResumeComponent]
+    declarations: [
+        AppComponent,
+        ResumesListComponent,
+        ResumeSelectorComponent,
+        ResumeGeneralComponent,
+        ExperiencesListComponent,
+        EditExperienceComponent,
+        EditResumeComponent,
+        DuplicateResumeThingComponent,
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatListModule,
+        MatSelectModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatDialogModule,
+        MatTooltipModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        RouterModule.forRoot([
+            {
+                path: '',
+                component: ResumesListComponent
+            },
+            {
+                path: 'general',
+                component: ResumeGeneralComponent
+            },
+            {
+                path: 'experiences',
+                component: ExperiencesListComponent
+            }
+        ]),
+    ],
+    providers: [
+        ResumeRepositoryService, 
+        ExperienceRepositoryService,
+        ResumeSelectorService,
+        RepositoryContainerService,
+        { provide: 'ExperienceRepository', useExisting: ExperienceRepositoryService },
+        { provide: 'ResumeRepository', useExisting: ResumeRepositoryService }
+    ],
+    bootstrap: [AppComponent],
+    entryComponents: [EditExperienceComponent, EditResumeComponent, DuplicateResumeThingComponent]
 })
 export class AppModule { }
