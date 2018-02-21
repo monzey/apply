@@ -9,23 +9,23 @@ import { ExperienceRepositoryService } from './experience-repository.service';
 @Injectable()
 export class ResumeRepositoryService extends RepositoryService {
 
-    constructor (http :Http, private experienceRepositoryService: ExperienceRepositoryService) {
-        super(http);
-    }
+  constructor (http :Http, private experienceRepositoryService: ExperienceRepositoryService) {
+    super(http);
+  }
 
-    protected getResourceName(): string {
-        return 'resumes';
-    }
+  protected getResourceName(): string {
+    return 'resumes';
+  }
 
-    public transformResource(r: any): Resume {
-        let thing = <Resume>({
-            id: r.id,
-            name: r.name,
-            description: r.description,
-            url: r.url,
-            experiences: this.experienceRepositoryService.transformResources(r.experiences)
-        });
+  public transformResource(r: any): Resume {
+    let thing = <Resume>({
+      id: r.id,
+      name: r.name,
+      description: r.description,
+      url: r.url,
+      experiences: this.experienceRepositoryService.transformResources(r.experiences)
+    });
 
-        return thing;
-    }
+    return thing;
+  }
 }

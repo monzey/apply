@@ -1,6 +1,4 @@
-import { Entity as BaseEntity } from './entity';
-
-export class Thing implements BaseEntity {
+export class Thing {
   id: number;
   name: string;
   description: string;
