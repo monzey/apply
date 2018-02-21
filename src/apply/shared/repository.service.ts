@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Thing } from '../model/thing';
 
 @Injectable()
-export abstract class RepositoryService {
+export class RepositoryService {
     readonly apiBaseUri = 'http://dev.api.apply';
     private _items: BehaviorSubject<Thing[]>;
     private _store: Thing[];
@@ -37,7 +37,9 @@ export abstract class RepositoryService {
      * Indicates resource name
      * @return {string}
      */
-    protected abstract getResourceName(): string
+    protected getResourceName(): string {
+        return '';
+    }
 
     /**
      * Gets all resources

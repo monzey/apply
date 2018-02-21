@@ -1,12 +1,13 @@
-import { Entity } from './entity';
+import { Entity as BaseEntity } from './entity';
 
-export class Thing {
-    id: number;
-    name: string;
-    description: string;
-    url: string;
+export class Thing implements BaseEntity {
+  id: number;
+  name: string;
+  description: string;
+  url: string;
+  repository: any;
 
-    constructor() {
-        this.url = '';
-    }
+  constructor() {
+    this.url = '';
+  }
 }

@@ -8,37 +8,37 @@ import { MatDialog } from '@angular/material';
 import { EditResumeComponent } from '../edit-resume/edit-resume.component';
 
 @Component({
-    selector: 'app-resumes-list',
-    providers: [],
-    templateUrl: './resumes-list.component.html',
-    styleUrls: ['./resumes-list.component.css']
+  selector: 'app-resumes-list',
+  providers: [],
+  templateUrl: './resumes-list.component.html',
+  styleUrls: ['./resumes-list.component.css']
 })
 export class ResumesListComponent implements OnInit {
-    private resumes$: Observable<Resume[]>;
+  private resumes$: Observable<Resume[]>;
 
-    constructor(
-        private resumeRepositoryService: ResumeRepositoryService,
-        private resumeSelectorService: ResumeSelectorService,
-        private router: Router,
-        private dialog: MatDialog
-    ) { }
+  constructor(
+    private resumeRepositoryService: ResumeRepositoryService,
+    private resumeSelectorService: ResumeSelectorService,
+    private router: Router,
+    private dialog: MatDialog
+  ) { }
 
-    selectResume(resume: Resume) {
-        this.resumeSelectorService.selectResume(resume);
-        this.router.navigate(['general']);
-    }
+  selectResume(resume: Resume) {
+    this.resumeSelectorService.selectResume(resume);
+    this.router.navigate(['general']);
+  }
 
-    deleteResume(resume: Resume) {
-        this.resumeRepositoryService.delete(resume);
-    }
+  deleteResume(resume: Resume) {
+    this.resumeRepositoryService.delete(resume);
+  }
 
-    editResume(resume: Resume) {
-        this.dialog.open(EditResumeComponent, {data: {resume: resume}});
-    }
+  editResume(resume: Resume) {
+    console.log(resume.repository);
+    this.dialog.open(EditResumeComponent, {data: {resume: resume}});
+  }
 
-    ngOnInit() {
-        this.resumes$ = this.resumeRepositoryService.items;
-        this.resumeRepositoryService.loadAll();
-    }
-
+  ngOnInit() {
+    this.resumes$ = this.resumeRepositoryService.items;
+    this.resumeRepositoryService.loadAll();
+  }
 }
