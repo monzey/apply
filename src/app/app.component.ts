@@ -4,9 +4,9 @@ import { MenuItem } from './model/menu-item';
 import { Resume } from './model/resume';
 import { ResumeRepositoryService } from './shared/resume-repository.service';
 import { MatDialog } from '@angular/material';
-import { EditResumeComponent } from './edit-resume/edit-resume.component';
+import { EditResumeComponent } from './resume/edit-resume/edit-resume.component';
 import { Observable } from 'rxjs/Observable';
-import { EditExperienceComponent } from './edit-experience/edit-experience.component';
+import { EditExperienceComponent } from './experience/edit-experience/edit-experience.component';
 import { ResumeSelectorService } from './shared/resume-selector.service';
 
 @Component({

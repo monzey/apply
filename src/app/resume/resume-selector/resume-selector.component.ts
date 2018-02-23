@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumeRepositoryService } from '../shared/resume-repository.service';
-import { Resume } from '../model/resume';
-import { ResumeSelectorService } from '../shared/resume-selector.service';
+import { ResumeRepositoryService } from '../../shared/resume-repository.service';
+import { Resume } from '../../model/resume';
+import { ResumeSelectorService } from '../../shared/resume-selector.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 

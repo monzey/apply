@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { ResumeRepositoryService } from '../shared/resume-repository.service';
-import { Resume } from '../model/resume';
+import { ResumeRepositoryService } from '../../shared/resume-repository.service';
+import { Resume } from '../../model/resume';
 
 @Component({
   selector: 'app-edit-resume',

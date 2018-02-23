@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumeRepositoryService } from '../shared/resume-repository.service';
-import { Resume } from '../model/resume';
+import { ResumeRepositoryService } from '../../shared/resume-repository.service';
+import { Resume } from '../../model/resume';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ResumeSelectorService } from '../shared/resume-selector.service';
+import { ResumeSelectorService } from '../../shared/resume-selector.service';
 import { MatDialog } from '@angular/material';
 import { EditResumeComponent } from '../edit-resume/edit-resume.component';
 

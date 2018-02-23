@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumeSelectorService } from '../shared/resume-selector.service';
-import { ExperienceRepositoryService } from '../shared/experience-repository.service';
-import { ResumeRepositoryService } from '../shared/resume-repository.service';
+import { ResumeSelectorService } from '../../shared/resume-selector.service';
+import { ExperienceRepositoryService } from '../../shared/experience-repository.service';
+import { ResumeRepositoryService } from '../../shared/resume-repository.service';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-import { Resume } from '../model/resume';
-import { Experience } from '../model/experience';
+import { Resume } from '../../model/resume';
+import { Experience } from '../../model/experience';
 import { EditExperienceComponent } from '../edit-experience/edit-experience.component';
-import { DuplicateResumeThingComponent } from '../duplicate-resume-thing/duplicate-resume-thing.component';
+import { DuplicateResumeThingComponent } from '../../resume/duplicate-resume-thing/duplicate-resume-thing.component';
 
 @Component({
     selector: 'app-experiences-list',

@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Experience } from '../model/experience';
-import { Resume } from '../model/resume';
-import { ExperienceRepositoryService } from '../shared/experience-repository.service';
+import { Experience } from '../../model/experience';
+import { Resume } from '../../model/resume';
+import { ExperienceRepositoryService } from '../../shared/experience-repository.service';
 
 @Component({
     selector: 'app-edit-experience',
