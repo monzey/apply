@@ -12,7 +12,7 @@ export class MenuService {
             new MenuItem('Experiences', '/experiences', 'business_center'),
             new MenuItem('Graduations', '/graduations', 'school'),
             new MenuItem('Projects', '/projects', 'whatshot'),
-            new MenuItem('Theme', '/theme', 'format_color_fill'),
+            new MenuItem('Theme', '/themes', 'format_color_fill'),
         ]
     }
 }
