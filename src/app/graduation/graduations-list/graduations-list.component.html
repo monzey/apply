@@ -1,3 +1,23 @@
-<p>
-  graduations-list works!
-</p>
+<mat-expansion-panel *ngFor="let graduation of graduations$ | async">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ graduation.title }}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{ graduation.school }}, {{ graduation.year }}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    {{ graduation.description }}
+    <mat-action-row>
+        <button mat-icon-button matTooltip="Create" matTooltipPosition="below" (click)="edit(graduation)">
+            <mat-icon>create</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Delete" matTooltipPosition="below" (click)="delete(graduation)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Duplicate" matTooltipPosition="below" (click)="duplicate(graduation)">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+    </mat-action-row>
+</mat-expansion-panel>
