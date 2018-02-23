@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { ResumeSelectorService } from '../shared/resume-selector.service';
 
     // Deps
     MatModule,
-    BrowserModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,

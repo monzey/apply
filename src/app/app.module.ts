@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 
 import { ResumeModule } from './resume/resume.module';
 import { ProjectModule } from './project/project.module';
-import { SkillModule } from './skill/skill.module';
 import { ThemeModule } from './theme/theme.module';
 import { ExperienceModule } from './experience/experience.module';
 import { GraduationModule } from './graduation/graduation.module';
@@ -26,7 +25,6 @@ import { AppComponent } from './app.component';
     // Internal modules
     ResumeModule,
     ExperienceModule,
-    SkillModule,
     ProjectModule,
     ThemeModule,
     GraduationModule,
