@@ -1,7 +1,7 @@
 <mat-expansion-panel *ngFor="let graduation of graduations$ | async">
     <mat-expansion-panel-header>
         <mat-panel-title>
-            {{ graduation.title }}
+            {{ graduation.name }}
         </mat-panel-title>
         <mat-panel-description>
             {{ graduation.school }}, {{ graduation.year }}

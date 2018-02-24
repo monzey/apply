@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Resume } from '../../model/resume';
 import { Graduation } from '../../model/graduation';
-// import { EditGraduationComponent } from '../edit-graduation/edit-graduation.component';
+import { EditGraduationComponent } from '../edit-graduation/edit-graduation.component';
 import { DuplicateResumeThingComponent } from '../../resume/duplicate-resume-thing/duplicate-resume-thing.component';
 
 @Component({
@@ -26,9 +26,9 @@ export class GraduationsListComponent implements OnInit {
   ) { }
 
   public edit(graduation: Graduation): void {
-    // this.dialog.open(EditGraduationComponent, {
-    //   data: { graduation: graduation }
-    // });
+    this.dialog.open(EditGraduationComponent, {
+      data: { graduation: graduation }
+    });
   }
 
   public delete(graduation: Graduation): void {
