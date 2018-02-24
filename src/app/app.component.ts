@@ -8,6 +8,7 @@ import { EditResumeComponent } from './resume/edit-resume/edit-resume.component'
 import { Observable } from 'rxjs/Observable';
 import { EditExperienceComponent } from './experience/edit-experience/edit-experience.component';
 import { EditGraduationComponent } from './graduation/edit-graduation/edit-graduation.component';
+import { EditProjectComponent } from './project/edit-project/edit-project.component';
 import { ResumeSelectorService } from './shared/resume-selector.service';
 
 @Component({
@@ -41,6 +42,10 @@ export class AppComponent {
   
     createGraduation() {
         this.dialog.open(EditGraduationComponent, {data: {resume: this.resume}});
+    }
+  
+    createProject() {
+        this.dialog.open(EditProjectComponent, {data: {resume: this.resume}});
     }
 
     ngOnInit() {

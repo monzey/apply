@@ -1,12 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MatModule } from '../mat/mat.module';
 
 import { ProjectsListComponent } from './projects-list/projects-list.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
+
+import { ProjectRepositoryService } from '../shared/project-repository.service';
 
 @NgModule({
   imports: [
     CommonModule,
+
+    // Deps
+    MatModule,
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     // Routes
     RouterModule.forRoot([
@@ -16,6 +30,20 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
       }
     ]),
   ],
-  declarations: [ProjectsListComponent]
+  exports: [
+    EditProjectComponent,
+    ProjectsListComponent
+  ],
+  declarations: [
+    ProjectsListComponent, 
+    EditProjectComponent
+  ],
+  entryComponents: [
+    EditProjectComponent
+  ],
+  providers: [
+    ProjectRepositoryService,
+    { provide: 'ProjectRepository', useExisting: ProjectRepositoryService },
+  ]
 })
 export class ProjectModule { }
