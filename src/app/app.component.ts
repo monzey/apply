@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { EditResumeComponent } from './resume/edit-resume/edit-resume.component';
 import { Observable } from 'rxjs/Observable';
 import { EditExperienceComponent } from './experience/edit-experience/edit-experience.component';
+import { EditGraduationComponent } from './graduation/edit-graduation/edit-graduation.component';
 import { ResumeSelectorService } from './shared/resume-selector.service';
 
 @Component({
@@ -36,6 +37,10 @@ export class AppComponent {
 
     createExperience() {
         this.dialog.open(EditExperienceComponent, {data: {resume: this.resume}});
+    }
+  
+    createGraduation() {
+        this.dialog.open(EditGraduationComponent, {data: {resume: this.resume}});
     }
 
     ngOnInit() {

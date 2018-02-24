@@ -6,64 +6,64 @@ import { Resume } from '../../model/resume';
 import { ExperienceRepositoryService } from '../../shared/experience-repository.service';
 
 @Component({
-    selector: 'app-edit-experience',
-    templateUrl: './edit-experience.component.html',
-    styleUrls: ['./edit-experience.component.scss']
+  selector: 'app-edit-experience',
+  templateUrl: './edit-experience.component.html',
+  styleUrls: ['./edit-experience.component.scss']
 })
 export class EditExperienceComponent implements OnInit {
-    protected experienceEditForm: FormGroup;
-    protected experience: Experience;
-    protected resume: Resume;
+  protected experienceEditForm: FormGroup;
+  protected experience: Experience;
+  protected resume: Resume;
 
-    constructor(
-        @Inject(MAT_DIALOG_DATA) private data: any,
-        private fb: FormBuilder,
-        private experienceRepositoryService: ExperienceRepositoryService,
-        private dialogRef: MatDialogRef<EditExperienceComponent>
-    ) {
-        if (data) {
-            this.resume = data.resume;
-            this.experience = data.experience;
-        }
-
-        this.createEditForm();
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private fb: FormBuilder,
+    private experienceRepositoryService: ExperienceRepositoryService,
+    private dialogRef: MatDialogRef<EditExperienceComponent>
+  ) {
+    if (data) {
+      this.resume = data.resume;
+      this.experience = data.experience;
     }
 
-    protected createEditForm() {
-        let experience: Experience;
+    this.createEditForm();
+  }
 
-        experience = new Experience;
+  protected createEditForm() {
+    let experience: Experience;
 
-        if (this.experience) {
-            experience = this.experience;
-        }
+    experience = new Experience;
 
-        this.experienceEditForm = this.fb.group({
-            name: experience.name,
-            description: experience.description,
-            year: experience.year,
-            url: experience.url,
-            company: experience.company,
-        })
+    if (this.experience) {
+      experience = this.experience;
     }
 
-    protected save() {
-        let experience: Experience;
-        experience = this.experienceEditForm.value;
+    this.experienceEditForm = this.fb.group({
+      name: experience.name,
+      description: experience.description,
+      year: experience.year,
+      url: experience.url,
+      company: experience.company,
+    })
+  }
 
-        if (this.experience) {
-            experience.id = this.experience.id;
-        }
+  protected save() {
+    let experience: Experience;
+    experience = this.experienceEditForm.value;
 
-        if (this.resume) {
-            experience.resumes = [this.resume];
-        }
-
-        this.experienceRepositoryService.save(experience);
-        this.dialogRef.close();
+    if (this.experience) {
+      experience.id = this.experience.id;
     }
 
-    ngOnInit() {
+    if (this.resume) {
+      experience.resumes = [this.resume];
     }
+
+    this.experienceRepositoryService.save(experience);
+    this.dialogRef.close();
+  }
+
+  ngOnInit() {
+  }
 
 }

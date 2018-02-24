@@ -18,10 +18,10 @@ export class GraduationRepositoryService extends RepositoryService {
     public transformResource(r: any): Graduation {
         let thing = <Graduation>({
             id: r.id,
-            title: r.name,
+            name: r.name,
             description: r.description,
             url: r.url,
-            school: r.company,
+            school: r.school,
             year: r.year,
             resumes: r.resumes
         });

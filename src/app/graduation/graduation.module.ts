@@ -10,6 +10,7 @@ import { MatModule } from '../mat/mat.module';
 import { GraduationsListComponent } from './graduations-list/graduations-list.component';
 
 import { GraduationRepositoryService } from '../shared/graduation-repository.service';
+import { EditGraduationComponent } from './edit-graduation/edit-graduation.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,11 @@ import { GraduationRepositoryService } from '../shared/graduation-repository.ser
     ]),
   ],
   declarations: [
-    GraduationsListComponent
+    GraduationsListComponent,
+    EditGraduationComponent
+  ],
+  entryComponents: [
+    EditGraduationComponent,
   ],
   providers: [
     GraduationRepositoryService,
