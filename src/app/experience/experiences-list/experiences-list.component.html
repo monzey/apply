@@ -1,23 +1,25 @@
-<mat-expansion-panel *ngFor="let experience of experiences$ | async">
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let experience of experiences$ | async">
     <mat-expansion-panel-header>
-        <mat-panel-title>
-            {{ experience.name }}
-        </mat-panel-title>
-        <mat-panel-description>
-            {{ experience.company }}, {{ experience.year }}
-        </mat-panel-description>
+      <mat-panel-title>
+        {{ experience.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ experience.company }}, {{ experience.year }}
+      </mat-panel-description>
     </mat-expansion-panel-header>
 
     {{ experience.description }}
     <mat-action-row>
-        <button mat-icon-button matTooltip="Create" matTooltipPosition="below" (click)="edit(experience)">
-            <mat-icon>create</mat-icon>
-        </button>
-        <button mat-icon-button matTooltip="Delete" matTooltipPosition="below" (click)="delete(experience)">
-            <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-icon-button matTooltip="Duplicate" matTooltipPosition="below" (click)="duplicate(experience)">
-            <mat-icon>content_copy</mat-icon>
-        </button>
+      <button mat-icon-button matTooltip="Create" matTooltipPosition="below" (click)="edit(experience)">
+        <mat-icon>create</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Delete" matTooltipPosition="below" (click)="delete(experience)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Duplicate" matTooltipPosition="below" (click)="duplicate(experience)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </mat-action-row>
-</mat-expansion-panel>
+  </mat-expansion-panel>
+</mat-accordion>

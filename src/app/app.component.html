@@ -38,7 +38,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side">
+    <mat-sidenav #sidenav mode="side" [opened]="true">
         <mat-nav-list>
             <a mat-list-item *ngFor="let menuItem of menuItems" routerLink="{{ menuItem.route }}">
                 <mat-icon mat-list-icon>{{ menuItem.icon }}</mat-icon>

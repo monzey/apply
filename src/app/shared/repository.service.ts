@@ -114,8 +114,6 @@ export class RepositoryService {
       let alreadyExisting = false;
       let index: number;
 
-      console.log(thing);
-
       this._store.filter((element, i) => {
         if (element.id == thing.id) {
           index = i;
