@@ -43,7 +43,7 @@ import { ProjectRepositoryService } from '../shared/project-repository.service';
   ],
   providers: [
     ProjectRepositoryService,
-    { provide: 'ProjectRepository', useExisting: ProjectRepositoryService },
+    { provide: 'SideProjectRepository', useExisting: ProjectRepositoryService },
   ]
 })
 export class ProjectModule { }

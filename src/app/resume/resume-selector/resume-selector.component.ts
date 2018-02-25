@@ -25,9 +25,12 @@ export class ResumeSelectorComponent implements OnInit {
     this.resumeSelectorService.selectResume(resume);
   }
 
+  compare(r1: Resume, r2: Resume) {
+    return r1.id === r2.id;
+  }
+
   ngOnInit() {
     this.selectedResume$ = this.resumeSelectorService.selected;
-
 
     this.resumes$ = this.resumeRepositoryService.items;
     this.resumeRepositoryService.loadAll();
