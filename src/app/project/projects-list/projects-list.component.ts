@@ -32,17 +32,13 @@ export class ProjectsListComponent implements OnInit {
   }
 
   public delete(project: Project): void {
-    if (project.resumes.length > 1) {
-      let resume: Resume;
+    let resume: Resume;
 
-      this.selectedResume$.subscribe(r => {
-        resume = r;
-      });
+    this.selectedResume$.subscribe(r => {
+      let resume = r;
+    });
 
-      this.unbind(project, resume);
-    } else {
-      this.projectRepositoryService.delete(project);
-    }
+    this.resumeRepositoryService.deleteFromResume(project, resume);
   }
 
   public duplicate(project: Project): void {
@@ -51,22 +47,22 @@ export class ProjectsListComponent implements OnInit {
     });
   }
 
-  private unbind(project: Project, resume: Resume): void {
-    project.resumes = project.resumes.filter(gradResume => {
-      return gradResume.id != resume.id;
-    });
-
-    this.projectRepositoryService.save(project);
-    let self = this;
-  }
-
   public ngOnInit(): void {
     let self = this;
     this.selectedResume$ = this.resumeSelectorService.selected;
 
     this.selectedResume$.subscribe(resume => {
       self.projects$ = self.projectRepositoryService.items;
-      self.projectRepositoryService.loadAll(resume.id);
+
+      let id: any;
+
+      if (resume == null) {
+        id = null;
+      } else {
+        id = resume.id
+      }
+
+      self.projectRepositoryService.loadAll(id);
     });
   }
 

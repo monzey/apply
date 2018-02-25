@@ -32,17 +32,13 @@ export class GraduationsListComponent implements OnInit {
   }
 
   public delete(graduation: Graduation): void {
-    if (graduation.resumes.length > 1) {
-      let resume: Resume;
+    let resume: Resume;
 
-      this.selectedResume$.subscribe(r => {
-        resume = r;
-      });
+    this.selectedResume$.subscribe(r => {
+      let resume = r;
+    });
 
-      this.unbind(graduation, resume);
-    } else {
-      this.graduationRepositoryService.delete(graduation);
-    }
+    this.resumeRepositoryService.deleteFromResume(graduation, resume);
   }
 
   public duplicate(graduation: Graduation): void {
@@ -66,7 +62,16 @@ export class GraduationsListComponent implements OnInit {
 
     this.selectedResume$.subscribe(resume => {
       self.graduations$ = self.graduationRepositoryService.items;
-      self.graduationRepositoryService.loadAll(resume.id);
+
+      let id: any;
+
+      if (resume == null) {
+        id = null;
+      } else {
+        id = resume.id
+      }
+
+      self.graduationRepositoryService.loadAll(id);
     });
   }
 

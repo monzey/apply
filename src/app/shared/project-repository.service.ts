@@ -7,23 +7,23 @@ import { RepositoryService } from './repository.service';
 
 @Injectable()
 export class ProjectRepositoryService extends RepositoryService {
-    protected getBaseResourceName(): string {
-        return 'resumes';
-    }
+  protected getBaseResourceName(): string {
+    return 'resumes';
+  }
 
-    protected getResourceName(): string {
-        return 'side_projects';
-    }
+  protected getResourceName(): string {
+    return 'side_projects';
+  }
 
-    public transformResource(r: any): Project {
-        let thing = <Project>({
-            id: r.id,
-            name: r.name,
-            description: r.description,
-            url: r.url,
-            resumes: r.resumes
-        });
+  public transformResource(r: any): Project {
+    let thing = <Project>({
+      id: r.id,
+      name: r.name,
+      description: r.description,
+      url: r.url,
+      resumes: r.resumes
+    });
 
-        return thing;
-    }
+    return thing;
+  }
 }

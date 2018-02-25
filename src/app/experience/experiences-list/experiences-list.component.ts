@@ -32,17 +32,13 @@ export class ExperiencesListComponent implements OnInit {
   }
 
   public delete(experience: Experience): void {
-    if (experience.resumes.length > 1) {
-      let resume: Resume;
+    let resume: Resume;
 
-      this.selectedResume$.subscribe(r => {
-        resume = r;
-      });
+    this.selectedResume$.subscribe(r => {
+      let resume = r;
+    });
 
-      this.unbind(experience, resume);
-    } else {
-      this.experienceRepositoryService.delete(experience);
-    }
+    this.resumeRepositoryService.deleteFromResume(experience, resume);
   }
 
   public duplicate(experience: Experience): void {
@@ -66,7 +62,16 @@ export class ExperiencesListComponent implements OnInit {
 
     this.selectedResume$.subscribe(resume => {
       self.experiences$ = self.experienceRepositoryService.items;
-      self.experienceRepositoryService.loadAll(resume.id);
+
+      let id: any;
+
+      if (resume == null) {
+        id = null;
+      } else {
+        id = resume.id
+      }
+
+      self.experienceRepositoryService.loadAll(id);
     });
   }
 
