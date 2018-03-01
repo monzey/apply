@@ -25,6 +25,17 @@ export class GraduationsListComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
+  public create(): void {
+    let resume: Resume;
+
+    this.selectedResume$.subscribe(r => {
+      resume = r;
+    });
+
+    console.log(resume);
+    this.dialog.open(EditGraduationComponent, {data: {resume: resume}});
+  }
+
   public edit(graduation: Graduation): void {
     this.dialog.open(EditGraduationComponent, {
       data: { graduation: graduation }

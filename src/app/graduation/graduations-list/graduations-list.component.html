@@ -1,4 +1,8 @@
 <mat-accordion>
+  <empty [condition]="(graduations$|async)?.length < 1" icon="school" (action)="create()" actionLabel="Create">
+    You don't have any graduations for this resume. Create one right now !
+  </empty>
+
   <mat-expansion-panel *ngFor="let graduation of graduations$ | async">
     <mat-expansion-panel-header>
       <mat-panel-title>

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatModule } from '../mat/mat.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { GraduationsListComponent } from './graduations-list/graduations-list.component';
 
@@ -18,6 +19,7 @@ import { EditGraduationComponent } from './edit-graduation/edit-graduation.compo
 
     // Deps
     MatModule,
+    SharedModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,

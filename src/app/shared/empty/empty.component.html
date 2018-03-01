@@ -1,0 +1,10 @@
+<div *ngIf="condition" class="empty grid-1">
+  <mat-icon class="col empty-icon">{{ icon }}</mat-icon>
+  <span class="col empty-text">
+    <ng-content></ng-content>
+  </span>
+  <div class="col">
+    <button mat-raised-button color="primary" (click)="triggerAction()">{{ actionLabel }}</button>
+  </div>
+</div>
+
