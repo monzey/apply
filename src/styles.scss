@@ -2,6 +2,10 @@
 @import "~gridlex/src/gridlex.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+body {
+  font-family: Roboto;
+}
+
 body, html, mat-sidenav-container {
     margin: 0;
     width: 100%;

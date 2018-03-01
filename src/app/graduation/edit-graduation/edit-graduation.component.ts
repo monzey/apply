@@ -59,7 +59,7 @@ export class EditGraduationComponent implements OnInit {
       graduation.resumes = [this.resume];
     }
 
-    this.graduationRepositoryService.save(graduation);
+    this.graduationRepositoryService.save(graduation).subscribe();
     this.dialogRef.close();
   }
 

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/empty';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Thing } from '../model/thing';
 import { environment } from '../../environments/environment';
@@ -9,15 +11,15 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class RepositoryService {
   readonly apiBaseUri = environment.apiBaseUri;
-  private _items: BehaviorSubject<Thing[]>;
-  private _store: Thing[];
+  protected _items: BehaviorSubject<Thing[]>;
+  protected _store: Thing[];
 
   /**
    * Constrcutor
    * @param  {Http}   http
    * @return {[type]}
    */
-  constructor(private http: Http) {
+  constructor(protected http: HttpClient) {
     this._items = <BehaviorSubject<Thing[]>>new BehaviorSubject([]);
     this._store = [];
   }
@@ -97,19 +99,19 @@ export class RepositoryService {
    * @param  {Thing}                thing
    * @return {Observable<Response>}
    */
-  save(thing: Thing): void {
-    let request;
+  save(thing: Thing): Observable<any> {
+    let request$;
 
     let data = this.denormalize(thing);
 
     // If the thing has an id, its considered that it already exists server side. We are then talking about an update
     if (thing.id) {
-      request = this.http.put(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`, data, { headers: this.getHeaders() });
+      request$ = this.http.put(`${this.apiBaseUri}/${this.getResourceName()}/${thing.id}`, data, { headers: this.getHeaders() });
     } else { // Else, we are talking about a creation
-      request = this.http.post(`${this.apiBaseUri}/${this.getResourceName()}`, data, { headers: this.getHeaders() });
+      request$ = this.http.post(`${this.apiBaseUri}/${this.getResourceName()}`, data, { headers: this.getHeaders() });
     }
 
-    request.subscribe((response) => {
+    return request$.map((response) => {
       thing = this.mapResource(response);
       let alreadyExisting = false;
       let index: number;
@@ -156,8 +158,8 @@ export class RepositoryService {
    * @param  {Response} response
    * @return {Thing[]}
    */
-  public mapResources(response: Response): Thing[] {
-    return response.json()['hydra:member'].map(this.transform, this);
+  public mapResources(response: HttpResponse<any>): Thing[] {
+    return response['hydra:member'].map(this.transform, this);
   }
 
   /**
@@ -165,8 +167,8 @@ export class RepositoryService {
    * @param  {Response} response
    * @return {Thing}
    */
-  protected mapResource(response: Response): Thing {
-    return this.transform(response.json());
+  protected mapResource(response: HttpResponse<any>): Thing {
+    return this.transform(response);
   }
 
   /**
@@ -222,7 +224,7 @@ export class RepositoryService {
    * @param {Thing} thing
    * @return string
    */
-  private denormalize(thing: Thing): string {
+  public denormalize(thing: Thing): string {
     for (let attribute in thing) {
       if (thing[attribute] instanceof Object && !(thing[attribute] instanceof Array)) {
         thing[attribute] = `/${attribute}/${thing[attribute].id}`
@@ -246,11 +248,11 @@ export class RepositoryService {
    * Gets headers for every requests concerning the apiBaseUri
    * @return {[type]}
    */
-  private getHeaders() {
-    let headers = new Headers();
-
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'application/json');
+  protected getHeaders() {
+    let headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    });
 
     return headers;
   }

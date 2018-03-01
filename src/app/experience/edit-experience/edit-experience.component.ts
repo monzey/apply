@@ -59,7 +59,7 @@ export class EditExperienceComponent implements OnInit {
       experience.resumes = [this.resume];
     }
 
-    this.experienceRepositoryService.save(experience);
+    this.experienceRepositoryService.save(experience).subscribe();
     this.dialogRef.close();
   }
 

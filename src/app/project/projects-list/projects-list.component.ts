@@ -45,7 +45,7 @@ export class ProjectsListComponent implements OnInit {
     let resume: Resume;
 
     this.selectedResume$.subscribe(r => {
-      let resume = r;
+      resume = r;
     });
 
     this.resumeRepositoryService.deleteFromResume(project, resume);

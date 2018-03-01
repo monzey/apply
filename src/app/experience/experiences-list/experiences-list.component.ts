@@ -64,7 +64,7 @@ export class ExperiencesListComponent implements OnInit {
       return expResume.id != resume.id;
     });
 
-    this.experienceRepositoryService.save(experience);
+    this.experienceRepositoryService.save(experience).subscribe();
     let self = this;
   }
 

@@ -38,7 +38,7 @@ export class DuplicateResumeThingComponent implements OnInit {
 
     this.thing['resumes'].push(this.resume);
 
-    repository.save(this.thing);
+    repository.save(this.thing).subscribe();
 
     this.dialogRef.close();
   }

@@ -57,7 +57,7 @@ export class EditProjectComponent implements OnInit {
       project.resumes = [this.resume];
     }
 
-    this.projectRepositoryService.save(project);
+    this.projectRepositoryService.save(project).subscribe();
     this.dialogRef.close();
   }
 

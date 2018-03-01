@@ -62,7 +62,7 @@ export class GraduationsListComponent implements OnInit {
       return gradResume.id != resume.id;
     });
 
-    this.graduationRepositoryService.save(graduation);
+    this.graduationRepositoryService.save(graduation).subscribe();
     let self = this;
   }
 
