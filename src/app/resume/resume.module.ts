@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatModule } from '../mat/mat.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { EditResumeComponent } from './edit-resume/edit-resume.component';
 import { ResumeGeneralComponent } from './resume-general/resume-general.component';
@@ -22,6 +23,7 @@ import { ResumeSelectorService } from '../shared/resume-selector.service';
 
     // Deps
     MatModule,
+    SharedModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,

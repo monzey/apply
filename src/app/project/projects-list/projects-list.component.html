@@ -1,4 +1,7 @@
 <mat-accordion>
+  <empty [condition]="(projects$|async)?.length < 1" icon="whatshot" (action)="create()" actionLabel="Create">
+    You don't have any side projects for this resume. Create one right now !
+  </empty>
   <mat-expansion-panel *ngFor="let project of projects$ | async">
     <mat-expansion-panel-header>
       <mat-panel-title>

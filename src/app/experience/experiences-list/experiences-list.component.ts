@@ -25,6 +25,18 @@ export class ExperiencesListComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
+  public create(): void {
+    let resume: Resume;
+
+    this.selectedResume$.subscribe(r => {
+      resume = r;
+    });
+
+    this.dialog.open(EditExperienceComponent, {
+      data: { resume: resume }
+    });
+  }
+
   public edit(experience: Experience): void {
     this.dialog.open(EditExperienceComponent, {
       data: { experience: experience }

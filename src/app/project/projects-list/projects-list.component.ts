@@ -25,6 +25,16 @@ export class ProjectsListComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
+  public create(): void {
+    let resume: Resume;
+
+    this.selectedResume$.subscribe(r => {
+      resume = r;
+    });
+
+    this.dialog.open(EditProjectComponent, {data: {resume: resume}});
+  }
+
   public edit(project: Project): void {
     this.dialog.open(EditProjectComponent, {
       data: { project: project }

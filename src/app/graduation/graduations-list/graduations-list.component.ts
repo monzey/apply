@@ -32,7 +32,6 @@ export class GraduationsListComponent implements OnInit {
       resume = r;
     });
 
-    console.log(resume);
     this.dialog.open(EditGraduationComponent, {data: {resume: resume}});
   }
 

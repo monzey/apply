@@ -1,4 +1,8 @@
 <mat-accordion>
+  <empty [condition]="(experiences$|async)?.length < 1" icon="business_center" (action)="create()" actionLabel="Create">
+    You don't have any experiences for this resume. Create one right now !
+  </empty>
+
   <mat-expansion-panel *ngFor="let experience of experiences$ | async">
     <mat-expansion-panel-header>
       <mat-panel-title>
