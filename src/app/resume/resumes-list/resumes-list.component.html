@@ -1,3 +1,7 @@
+<empty [condition]="(resumes$|async)?.length < 1" icon="contacts" (action)="create()" actionLabel="Create">
+  You don't have any resumes yet. Create one right now !
+</empty>
+
 <div class="grid-3">
     <div class="col" *ngFor="let resume of resumes$ | async">
         <mat-card>

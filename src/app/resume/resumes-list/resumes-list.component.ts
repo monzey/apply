@@ -23,6 +23,10 @@ export class ResumesListComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
+  create(): void {
+    this.dialog.open(EditResumeComponent, {});
+  }
+
   selectResume(resume: Resume) {
     this.resumeSelectorService.selectResume(resume);
     this.router.navigate(['general']);
@@ -33,7 +37,6 @@ export class ResumesListComponent implements OnInit {
   }
 
   editResume(resume: Resume) {
-    console.log(resume.repository);
     this.dialog.open(EditResumeComponent, {data: {resume: resume}});
   }
 
