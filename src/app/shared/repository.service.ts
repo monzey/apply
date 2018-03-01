@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -111,7 +113,7 @@ export class RepositoryService {
       request$ = this.http.post(`${this.apiBaseUri}/${this.getResourceName()}`, data, { headers: this.getHeaders() });
     }
 
-    return request$.map((response) => {
+    return request$.flatMap((response) => {
       thing = this.mapResource(response);
       let alreadyExisting = false;
       let index: number;
@@ -133,6 +135,8 @@ export class RepositoryService {
 
       let items = this._store;
       this._items.next(items);
+
+      return Observable.of(response);
     });
   }
 
