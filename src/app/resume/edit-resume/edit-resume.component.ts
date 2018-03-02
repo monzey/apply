@@ -41,6 +41,7 @@ export class EditResumeComponent implements OnInit {
       name: resume.name,
       description: resume.description,
       url: resume.url,
+      about: resume.about
     });
   }
 

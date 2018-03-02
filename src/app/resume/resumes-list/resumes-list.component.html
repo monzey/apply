@@ -4,18 +4,69 @@
 
 <div class="grid-3">
     <div class="col" *ngFor="let resume of resumes$ | async">
-        <mat-card>
-            <mat-card-title>
-                {{ resume.name }}
-            </mat-card-title>
-            <mat-card-content>
-                <p>{{ resume.description }}</p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-icon-button matTooltip="Configure" matTooltipPosition="below" (click)="selectResume(resume)"><mat-icon>settings</mat-icon></button>
-                <button mat-icon-button matTooltip="Delete" matTooltipPosition="below" (click)="deleteResume(resume)"><mat-icon>delete</mat-icon></button>
-                <button mat-icon-button matTooltip="Edit" matTooltipPosition="below" (click)="editResume(resume)"><mat-icon>create</mat-icon></button>
-            </mat-card-actions>
-        </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            {{ resume.name }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ resume.description }}
+          </mat-card-subtitle>
+
+        <button class="card-menu" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="configure(resume, 'experiences')">
+                <mat-icon>business_center</mat-icon>
+                <span>Configure experiences</span>
+            </button>
+            <button mat-menu-item (click)="configure(resume, 'projects')">
+                <mat-icon>whatshot</mat-icon>
+                <span>Configure side projects</span>
+            </button>
+            <button mat-menu-item (click)="configure(resume, 'graduations')">
+                <mat-icon>school</mat-icon>
+                <span>Configure graduations</span>
+            </button>
+            <button mat-menu-item (click)="edit(resume)">
+                <mat-icon>create</mat-icon>
+                <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="delete(resume)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+            </button>
+        </mat-menu>
+
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>account_circle</mat-icon>
+              <p mat-line>{{ (parameters$ | async)?.fullName }}</p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>email</mat-icon>
+              <p mat-line>{{ (parameters$ | async)?.emailAddress }}</p>
+            </mat-list-item>
+          </mat-list>
+          <p>
+            {{ resume.about }}
+          </p>
+          <mat-chip-list>
+            <mat-chip [attr.color]="resume.experiences?.length > 0 ? 'primary': null">
+              {{ resume.experiences?.length || 0 }} Experiences
+            </mat-chip>
+            <mat-chip [attr.color]="resume.projects?.length > 0 ? 'primary': null">
+              {{ resume.projects?.length || 0 }} Side projects
+            </mat-chip>
+            <mat-chip [attr.color]="resume.graduations?.length > 0 ? 'primary': null">
+              {{ resume.graduations?.length || 0 }} Graduations
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
     </div>
 </div>

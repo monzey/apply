@@ -15,6 +15,7 @@ import { ResumesListComponent } from './resumes-list/resumes-list.component';
 import { DuplicateResumeThingComponent } from './duplicate-resume-thing/duplicate-resume-thing.component';
 
 import { ResumeRepositoryService } from '../shared/resume-repository.service';
+import { ParametersRepositoryService } from '../shared/parameters-repository.service';
 import { ResumeSelectorService } from '../shared/resume-selector.service';
 
 @NgModule({
@@ -60,6 +61,7 @@ import { ResumeSelectorService } from '../shared/resume-selector.service';
   ],
   providers: [
     ResumeRepositoryService, 
+    ParametersRepositoryService, 
     ResumeSelectorService,
     { provide: 'ResumeRepository', useExisting: ResumeRepositoryService }
   ]

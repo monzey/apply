@@ -1,10 +1,15 @@
 import { Thing } from './thing';
 import { Experience } from './experience';
+import { Project } from './project';
+import { Graduation } from './graduation';
 
 export class Resume extends Thing {
-    experiences: Experience[];
+  experiences: Experience[];
+  graduations: Graduation[];
+  projects: Project[];
+  about: string;
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }

@@ -73,7 +73,7 @@ export class RepositoryService {
   }
 
   /**
-   * Getes all resources based on parameters
+   * Gets all resources based on parameters
    * @param {any[]} parameters
    */
   load(parameters: any[]): void {
@@ -171,7 +171,7 @@ export class RepositoryService {
    * @param  {Response} response
    * @return {Thing}
    */
-  protected mapResource(response: HttpResponse<any>): Thing {
+  protected mapResource(response: HttpResponse<any>): any {
     return this.transform(response);
   }
 
@@ -183,11 +183,13 @@ export class RepositoryService {
   public transformResources(r: any): Thing[] {
     let items = [];
 
-    for (let item of r) {
-      let converted = this.transformResource(item);
-      converted['@type'] = item['@type']; // keep the type
+    if (r != null) {
+      for (let item of r) {
+        let converted = this.transformResource(item);
+        converted['@type'] = item['@type']; // keep the type
 
-      items.push(converted);
+        items.push(converted);
+      }
     }
 
     return items;

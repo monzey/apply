@@ -19,6 +19,10 @@ body, html, mat-sidenav-container {
     flex: 1 1 auto;
 }
 
+.card-menu {
+    margin-left: auto !important;
+}
+
 mat-sidenav {
     width: 15%;
 }

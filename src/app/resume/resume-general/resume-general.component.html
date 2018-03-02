@@ -1,7 +1,0 @@
-<empty [condition]="! (selectedResume$ | async)?.id" icon="flash_on" (action)="create()" actionLabel="Create">
-  Choose a resume first, or create one if you'd like!
-</empty>
-
-<div *ngIf="(selectedResume$ | async)?.id">
-  {{ (selectedResume$ | async).name }}
-</div>

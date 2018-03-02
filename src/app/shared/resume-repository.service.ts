@@ -7,6 +7,8 @@ import { HasResumes } from '../model/has-resumes.interface';
 import { RepositoryService } from './repository.service';
 import { RepositoryContainerService } from './repository-container.service';
 import { ExperienceRepositoryService } from './experience-repository.service';
+import { ProjectRepositoryService } from './project-repository.service';
+import { GraduationRepositoryService } from './graduation-repository.service';
 
 @Injectable()
 export class ResumeRepositoryService extends RepositoryService {
@@ -14,6 +16,8 @@ export class ResumeRepositoryService extends RepositoryService {
   constructor (
     http :HttpClient,
     private experienceRepositoryService: ExperienceRepositoryService,
+    private projectRepositoryService: ProjectRepositoryService,
+    private graduationRepositoryService: GraduationRepositoryService,
     private rContainer: RepositoryContainerService
   ) {
     super(http);
@@ -29,7 +33,10 @@ export class ResumeRepositoryService extends RepositoryService {
       name: r.name,
       description: r.description,
       url: r.url,
-      experiences: this.experienceRepositoryService.transformResources(r.experiences)
+      about: r.about,
+      experiences: this.experienceRepositoryService.transformResources(r.experiences),
+      projects: this.projectRepositoryService.transformResources(r.sideProjects),
+      graduations: this.graduationRepositoryService.transformResources(r.graduations)
     });
 
     return thing;

@@ -20,9 +20,11 @@ import {
   MatTooltipModule
 } from '@angular/material';
 
+// import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+
 @NgModule({
   imports: [
-    // CommonModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
@@ -38,10 +40,11 @@ import {
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    // MatDividerModule,
+    MatChipsModule,
     MatTooltipModule
   ],
   exports: [
-    // CommonModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
@@ -57,6 +60,8 @@ import {
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatChipsModule,
+    // MatDividerModule,
     MatTooltipModule
   ],
   declarations: []
