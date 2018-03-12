@@ -26,3 +26,7 @@ body, html, mat-sidenav-container {
 mat-sidenav {
     width: 15%;
 }
+
+mat-dialog-actions button:first-child {
+  margin-left: auto !important;
+}
