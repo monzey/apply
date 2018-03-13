@@ -1,0 +1,67 @@
+<div class="grid">
+  <mat-grid-list class="col-4" cols="1" rowHeight="300px">
+    <mat-grid-tile>
+    <img src="https://aliasthebugman.com/wp-content/uploads/2017/08/empty-avatar.png" alt="avatar" >
+      <mat-grid-tile-footer [style.background]="grey">
+        Photo
+        <button class="list-action" mat-icon-button matTooltip="Change photo">
+            <mat-icon>create</mat-icon>
+        </button>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-list class="col-8">
+    <h3 mat-subheader>
+      General informations
+      <button class="list-action" mat-icon-button matTooltip="Edit general informations">
+          <mat-icon>create</mat-icon>
+      </button>
+    </h3>
+    <mat-list-item>
+      <h1 mat-line>Maxime Bertrand</h1>
+    </mat-list-item>
+    <mat-list-item>
+      <h4 mat-line>Développeur web</h4>
+    </mat-list-item>
+    <mat-list-item>
+      <p mat-line class="wrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit sagittis ligula. Nullam eget urna vitae magna convallis pulvinar. Vivamus eu elementum metus. Cras a cursus nulla. Etiam ac luctus arcu, sed lacinia risus. Quisque sed congue velit. Duis quis quam ut elit iaculis iaculis. In hac habitasse platea dictumst. Pellentesque arcu mi, dignissim ut mauris at, elementum viverra mi. Fusce id sapien tellus. Duis a tortor sed eros gravida ultrices non vitae turpis. Vivamus sodales neque a leo egestas facilisis. In auctor id magna non porta. Maecenas interdum interdum quam eget lacinia. Nam nisl ipsum, commodo vitae orci eget, pharetra laoreet nibh. Sed vitae ornare dolor. Nulla et augue a nisl pharetra facilisis at id nulla. Vestibulum luctus auctor ante a molestie.</p>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-divider class="col-12"></mat-divider>
+
+  <mat-list class="col-12">
+    <h3 mat-subheader>
+      Coordinates
+      <button class="list-action" mat-icon-button matTooltip="Edit coordinates">
+          <mat-icon>create</mat-icon>
+      </button>
+    </h3>
+    <mat-list-item>
+      <mat-icon mat-list-icon>email</mat-icon>
+      <p mat-line>maxi.bertrand@gmail.com</p>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>phone</mat-icon>
+      <p mat-line>+33 6 27 33 02 04</p>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-divider class="col-12"></mat-divider>
+
+  <mat-list class="col-12">
+    <h3 mat-subheader>
+      Social Links
+      <button class="list-action" mat-icon-button matTooltip="Manage social links">
+          <mat-icon>settings</mat-icon>
+      </button>
+    </h3>
+    <mat-list-item>
+      <p mat-line>Linked in</p>
+    </mat-list-item>
+    <mat-list-item>
+      <p mat-line>Github</p>
+    </mat-list-item>
+  </mat-list>
+</div>

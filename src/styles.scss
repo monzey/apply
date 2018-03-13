@@ -20,6 +20,10 @@ body, html, mat-sidenav-container {
 }
 
 .card-menu {
+    @extend .list-action;
+}
+
+.list-action {
     margin-left: auto !important;
 }
 

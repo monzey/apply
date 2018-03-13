@@ -17,7 +17,8 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatGridListModule
 } from '@angular/material';
 
 // import { MatDividerModule } from '@angular/material/divider';
@@ -40,6 +41,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatGridListModule,
     // MatDividerModule,
     MatChipsModule,
     MatTooltipModule
@@ -61,6 +63,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
+    MatGridListModule,
     // MatDividerModule,
     MatTooltipModule
   ],
